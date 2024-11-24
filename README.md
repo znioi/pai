@@ -530,5 +530,74 @@ Q . . .
 . Q . .
 
 
+# Experiment No. 6: Monkey Banana Problem Using Prolog
+
+## Aim
+To implement the Monkey-Banana problem using Prolog and demonstrate logical reasoning for achieving a goal.
+
+## Program
+```prolog
+% Objects in the room
+in_room(banana).
+in_room(chair).
+in_room(monkey).
+
+% Actions available
+push(monkey, chair).
+can_climb(monkey, chair).
+grasp(monkey, banana).
+eat(monkey, banana).
+
+% Rule to determine if the monkey can reach and eat the banana
+can_reach(X, Y) :-
+    in_room(X), in_room(Y), in_room(Z),
+    push(X, Z),
+    can_climb(X, Z),
+    grasp(X, Y),
+    eat(X, Y).
+
+% Query
+?- can_reach(monkey, banana).
+```
+
+## Theory
+
+### Monkey-Banana Problem
+The Monkey-Banana Problem is a classic problem in artificial intelligence and logic programming that demonstrates goal-driven behavior and problem-solving. The problem involves a monkey in a room with a banana hanging from the ceiling, a chair, and the need to combine actions to achieve the goal of eating the banana. The problem is often used to illustrate:
+
+1. **Logical Reasoning**: Determining the sequence of actions required to achieve the goal.
+2. **State Representation**: Representing the environment (monkey, chair, banana) and actions in logical terms.
+3. **Goal-Oriented Planning**: Finding a path from the initial state to the goal state.
+
+### Problem Description
+The room contains:
+- A **monkey** on the ground.
+- A **banana** hanging from the ceiling.
+- A **chair** that can be pushed and climbed.
+
+The goal is for the monkey to grasp and eat the banana. The actions available to the monkey include:
+1. **Push**: The monkey can push the chair to a position under the banana.
+2. **Climb**: The monkey can climb the chair.
+3. **Grasp**: The monkey can reach for the banana from the chair.
+4. **Eat**: The monkey can eat the banana once it is grasped.
+
+### Prolog Representation
+1. **Facts**: Represent the objects in the room (`in_room`) and the monkey's abilities (`push`, `can_climb`, `grasp`, `eat`).
+2. **Rules**: Define the conditions for achieving the goal (`can_reach`), combining logical steps such as pushing, climbing, grasping, and eating.
+3. **Query**: Test if the monkey can reach and eat the banana using the defined facts and rules.
+
+### Explanation of Code
+- **`in_room`**: Specifies the presence of objects in the room.
+- **`push`, `can_climb`, `grasp`, `eat`**: Actions the monkey can perform.
+- **`can_reach`**: Combines all actions logically to determine if the monkey can reach and eat the banana.
+- **Query**: `?- can_reach(monkey, banana).` checks whether the monkey can successfully eat the banana.
+
+### Execution
+The Prolog program evaluates the facts and rules to determine if the sequence of actions (push chair, climb chair, grasp banana, eat banana) is possible, ultimately returning a success if the goal is achievable.
+
+## Conclusion
+The Monkey-Banana problem demonstrates how Prolog can model real-world problems using logical facts and rules. It highlights the importance of reasoning and planning in artificial intelligence.
+
+
 
     
