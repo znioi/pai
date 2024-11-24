@@ -602,4 +602,115 @@ The Prolog program evaluates the facts and rules to determine if the sequence of
 The Monkey-Banana problem demonstrates how Prolog can model real-world problems using logical facts and rules. It highlights the importance of reasoning and planning in artificial intelligence.
 
 
+# Experiment No. 7
+
+## Aim:
+Develop a Medical Diagnostic System using Prolog.
+
+---
+
+## Program:
+```prolog
+% Define symptoms for a patient
+symptom(charlie, fever).
+symptom(charlie, rash).
+symptom(charlie, headache).
+symptom(charlie, runny_nose).
+
+% Define hypotheses based on symptoms
+hypothesis(Patient, measles) :-
+    symptom(Patient, fever),
+    symptom(Patient, cough),
+    symptom(Patient, conjunctivities),
+    symptom(Patient, runny_nose),
+    symptom(Patient, rash).
+
+hypothesis(Patient, german_measles) :-
+    symptom(Patient, fever),
+    symptom(Patient, headache),
+    symptom(Patient, runny_nose),
+    symptom(Patient, rash).
+
+hypothesis(Patient, flu) :-
+    symptom(Patient, fever),
+    symptom(Patient, headache),
+    symptom(Patient, body_ache),
+    symptom(Patient, conjunctivities),
+    symptom(Patient, chills),
+    symptom(Patient, sore_throat),
+    symptom(Patient, cough),
+    symptom(Patient, runny_nose).
+
+hypothesis(Patient, common_cold) :-
+    symptom(Patient, headache),
+    symptom(Patient, sneezing),
+    symptom(Patient, sore_throat),
+    symptom(Patient, chills),
+    symptom(Patient, runny_nose).
+
+hypothesis(Patient, mumps) :-
+    symptom(Patient, fever),
+    symptom(Patient, swollen_glands).
+
+hypothesis(Patient, chicken_pox) :-
+    symptom(Patient, fever),
+    symptom(Patient, rash),
+    symptom(Patient, body_ache),
+    symptom(Patient, chills).
+
+hypothesis(Patient, whooping_cough) :-
+    symptom(Patient, cough),
+    symptom(Patient, sneezing),
+    symptom(Patient, runny_nose).
+
+% Query Example
+?- hypothesis(charlie, Disease).
+```
+
+---
+
+## Output:
+```prolog
+?- hypothesis(charlie, Disease).
+Patient = charlie,
+Disease = german_measles.
+```
+
+---
+
+## Theory:
+
+### Medical Diagnostic System:
+A medical diagnostic system in Prolog is an expert system designed to infer potential diseases or medical conditions based on the symptoms provided for a patient. The program utilizes Prolog’s rule-based logic to map symptoms to specific diagnoses.
+
+### Components of the System:
+1. **Facts:** These represent known information about the patient, such as their symptoms. For example:
+   ```prolog
+   symptom(charlie, fever).
+   symptom(charlie, rash).
+   ```
+
+2. **Rules:** These describe the relationship between symptoms and potential diseases. For example:
+   ```prolog
+   hypothesis(Patient, measles) :-
+       symptom(Patient, fever),
+       symptom(Patient, rash),
+       symptom(Patient, runny_nose).
+   ```
+
+3. **Queries:** The system is queried to deduce the disease based on the given symptoms:
+   ```prolog
+   ?- hypothesis(charlie, Disease).
+   ```
+
+### Advantages of Prolog in Medical Diagnosis:
+- **Declarative Nature:** Prolog allows the developer to define the problem domain in terms of facts and rules without detailing procedural steps.
+- **Pattern Matching:** Prolog’s built-in unification and backtracking capabilities make it efficient for matching symptoms to rules.
+- **Extendibility:** New diseases and symptoms can easily be added to the system without altering the existing logic.
+
+### Applications:
+- Clinical decision support systems.
+- Differential diagnosis tools.
+- Teaching and training tools in medical schools.
+
     
