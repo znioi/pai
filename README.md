@@ -528,6 +528,9 @@ For `[3, 1, 4, 2]`:
 Q . . .
 . . . Q
 . Q . .
+```
+
+
 
 
 # Experiment No. 6: Monkey Banana Problem Using Prolog
@@ -597,7 +600,6 @@ The Prolog program evaluates the facts and rules to determine if the sequence of
 
 ## Conclusion
 The Monkey-Banana problem demonstrates how Prolog can model real-world problems using logical facts and rules. It highlights the importance of reasoning and planning in artificial intelligence.
-
 
 
     
