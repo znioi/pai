@@ -306,4 +306,74 @@ Floor value is: 3
 Prolog's built-in predicates like `div/2`, `mod/2`, `sqrt/1`, and `max/2` are useful for various mathematical operations. The use of `write/1` and `read/1` enables user interaction for input and output.
 
 
+# Experiment No. 3
+
+## Aim
+Write a program to implement local variables and conditional statements using Prolog.
+
+## Theory
+### Local Variables in Prolog
+In Prolog, variables are typically used to store values during the execution of predicates. However, Prolog does not have traditional "local variables" as in imperative languages. Instead, variables defined within a predicate's body are local to that predicate and are not accessible outside its scope. This allows for encapsulation of data within predicates.
+
+### Conditional Statements (If-Then-Else)
+Prolog uses the `->` operator for implementing conditional statements. The structure of a conditional in Prolog is as follows:
+
+```prolog
+Condition -> Action1 ; Action2.
+```
+- **Condition**: A Prolog goal that evaluates to true or false.
+- **Action1**: Executed if the condition is true.
+- **Action2**: Executed if the condition is false.
+
+The `;` operator acts as an "else" clause in the conditional statement.
+
+### Example
+```prolog
+check_number(X, Result) :-
+    (X > 0 -> Result = 'Positive';
+     X < 0 -> Result = 'Negative';
+     Result = 'Zero').
+```
+In this example:
+- If `X` is greater than 0, the result is 'Positive'.
+- If `X` is less than 0, the result is 'Negative'.
+- Otherwise, the result is 'Zero'.
+
+## Program
+```prolog
+my_predicate(X, Y) :-
+    LocalVariable = 42,
+    write('LocalVariable='), write(LocalVariable), nl,
+    (   X = 1 -> Y = 'X is 1', write(Y);
+        X = 2 -> Y = 'X is 2', write(Y);
+        Y = 'X is neither 1 nor 2'
+    ).
+```
+
+## Example Query and Output
+
+### Query
+```prolog
+?- my_predicate(1, Y).
+```
+
+### Output
+```
+LocalVariable=42
+X is 1
+```
+
+### Additional Example
+#### Query
+```prolog
+?- my_predicate(3, Y).
+```
+#### Output
+```
+LocalVariable=42
+X is neither 1 nor 2
+```
+
+
+
     
