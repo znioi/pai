@@ -375,5 +375,59 @@ X is neither 1 nor 2
 ```
 
 
+# Experiment No. 4
+
+## Aim
+Write a program to calculate the factorial of a given number using Prolog.
+
+## Theory
+### Factorial Definition
+The factorial of a non-negative integer `n` is the product of all positive integers less than or equal to `n`. It is denoted by `n!` and is defined as:
+
+```
+n! = n × (n-1) × (n-2) × ... × 1
+```
+For example:
+- `0! = 1` (by definition)
+- `5! = 5 × 4 × 3 × 2 × 1 = 120`
+
+### Recursion in Prolog
+Recursion is a fundamental concept in Prolog, where a predicate calls itself to solve smaller instances of a problem. Recursion typically involves:
+1. **Base Case**: A condition where the recursion stops.
+2. **Recursive Case**: A rule that reduces the problem into smaller sub-problems.
+
+In Prolog, recursion is used to traverse and compute results over structures or numerical sequences. It is especially useful for problems like factorial computation, list processing, and tree traversals.
+
+## Program
+```prolog
+factorial(0, 1). % Base case: factorial of 0 is 1
+factorial(N, X) :-
+    N > 0,
+    N1 is N - 1,
+    factorial(N1, X1), % Recursive call
+    X is X1 * N.
+```
+
+## Example Query and Output
+
+### Query
+```prolog
+?- factorial(5, X).
+```
+
+### Output
+```
+X = 120
+```
+
+### Explanation
+1. The base case `factorial(0, 1)` stops the recursion when `N` reaches 0.
+2. For `factorial(5, X)`, the recursive calls break it down as:
+   - `factorial(5, X) = 5 × factorial(4, X1)`
+   - `factorial(4, X1) = 4 × factorial(3, X2)`
+   - ...
+   - Until `factorial(0, 1)` is reached.
+
+
 
     
