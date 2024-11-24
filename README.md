@@ -778,7 +778,106 @@ The 8-puzzle problem is used in:
 - Problem-solving techniques such as Breadth-First Search (BFS) and A*.
 - Educational tools for understanding state space and heuristics.
 
-Let me know if you need additional examples or details!
+
+
+# Experiment No. 9: Depth First Search (DFS) to Solve a Real-Life Problem
+
+## **Objective**
+To solve a real-life problem using the Depth First Search (DFS) algorithm.
+
+---
+
+## **Theory: Depth First Search (DFS)**
+
+Depth First Search (DFS) is a fundamental graph traversal algorithm used to explore nodes and edges of a graph. Starting from an initial node, it explores as far as possible along each branch before backtracking. DFS is typically implemented using recursion or an explicit stack.
+
+### **Key Characteristics of DFS**
+1. **Traversal Technique:** DFS moves deep into the graph/tree before exploring siblings.
+2. **Data Structure:** It can be implemented recursively or iteratively using a stack.
+3. **Applications:**
+   - Pathfinding
+   - Cycle detection in graphs
+   - Solving puzzles (e.g., mazes, N-Queens)
+   - Analyzing connectivity in networks
+
+### **Real-Life Problem:**
+In this experiment, we simulate a simple real-life scenario using DFS to navigate from a starting number to a goal number, where the neighbors are determined by incrementing the current number.
+
+---
+
+## **Prolog Implementation**
+
+Below is the Prolog implementation of a Depth First Search algorithm to find a path from a starting node to a goal node:
+
+```prolog
+% Base case: If the current node is the goal, print success.
+dfs(Current, Goal) :- 
+    Current = Goal, 
+    write('Reached goal!'), nl.
+
+% Recursive case: Explore neighboring nodes.
+dfs(Current, Goal) :- 
+    write('Current node: '), write(Current), nl, 
+    neighbor(Current, Next), 
+    dfs(Next, Goal).
+
+% Define a simple neighbor relationship.
+neighbor(A, B) :- 
+    B is A + 1.
+```
+
+---
+
+## **Execution and Output**
+
+### **Query**
+To find a path from 1 to 10, execute the following query:
+
+```prolog
+?- dfs(1, 10).
+```
+
+### **Expected Output**
+```
+Current node: 1
+Current node: 2
+Current node: 3
+Current node: 4
+Current node: 5
+Current node: 6
+Current node: 7
+Current node: 8
+Current node: 9
+Current node: 10
+Reached goal!
+```
+
+---
+
+## **Example Applications**
+1. **Pathfinding in Graphs:**
+   - Finding a route from one city to another.
+2. **Solving Mazes:**
+   - Exploring paths from the entrance to the exit of a maze.
+3. **Network Traversal:**
+   - Determining connectivity or finding specific resources in a network.
+
+---
+
+## **How to Run**
+1. Copy the Prolog code into a `.pl` file (e.g., `dfs_example.pl`).
+2. Open a Prolog interpreter (e.g., SWI-Prolog).
+3. Load the file using `[dfs_example].`.
+4. Run the query `?- dfs(1, 10).` to observe the result.
+
+---
+
+## **Conclusion**
+This experiment demonstrates the use of the Depth First Search (DFS) algorithm in solving a simple numerical traversal problem. By defining custom neighbor relations, the algorithm can be adapted to various real-life scenarios.
+
+--- 
+
+
 
 
 
