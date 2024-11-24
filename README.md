@@ -713,4 +713,73 @@ A medical diagnostic system in Prolog is an expert system designed to infer pote
 - Differential diagnosis tools.
 - Teaching and training tools in medical schools.
 
+## EXPERIMENT NO. 8
+
+### Aim:
+To solve the 8-puzzle problem using Prolog.
+
+### Prolog Code:
+```prolog
+% Define transitions for moving the blank space (0) to the left
+left(A, 0, B, C, D, E, F, G, H) :- state(0, A, B, C, D, E, F, G, H).
+
+% Initial state of the puzzle (START)
+% The blank space is represented by 0
+% 2  8  3
+% 1  6  4
+% 7     5
+state(2, 8, 3, 1, 6, 4, 7, 0, 5).
+
+% Goal state of the puzzle (GOAL)
+% 1  2  3
+% 8     4
+% 7  6  5
+state(1, 2, 3, 8, 0, 4, 7, 6, 5).
+
+% Transitions for moving the blank space (0) in various directions
+state(A, B, C, D, E, F, G, 0, H) :- state(A, B, C, D, 0, E, F, G, H);
+                                    state(A, B, C, D, E, F, 0, G, H);
+                                    state(A, B, C, D, E, F, G, H, 0).
+
+state(A, B, C, D, 0, E, F, G, H) :- state(A, 0, B, C, D, E, F, G, H).
+
+state(A, 0, B, C, D, E, F, G, H) :- state(0, A, B, C, D, E, F, G, H).
+
+state(0, A, B, C, D, E, F, G, H) :- state(A, B, C, 0, D, E, F, G, H).
+
+state(A, B, C, 0, D, E, F, G, H) :- state(A, B, C, D, 0, E, F, G, H).
+```
+
+### Output:
+Given the start and goal states, the program determines a series of valid transitions to solve the puzzle.
+
+### Theory:
+
+#### 8-Puzzle Problem:
+The 8-puzzle problem is a classic AI problem that involves sliding tiles on a 3x3 board to reach a goal configuration. It consists of 8 numbered tiles and one blank space. The objective is to rearrange the tiles from an initial state (START) to a goal state (GOAL) by sliding tiles into the blank space.
+
+#### Components of the Problem:
+1. **State Space**: All possible configurations of the board.
+2. **Initial State**: The starting configuration of the board.
+3. **Goal State**: The target configuration.
+4. **Operators**: Valid moves that change the board configuration, such as moving the blank space up, down, left, or right.
+
+#### Prolog Implementation:
+In Prolog, the 8-puzzle problem is represented as a series of states and transitions. The `state` predicate defines the positions of the tiles and the blank space (0). Transition rules are used to specify how the blank space moves.
+
+#### Key Concepts:
+1. **State Representation**: The board is represented as a flat list of 9 elements, where each element corresponds to a tile or the blank space (0).
+2. **Transition Rules**: Define valid moves for the blank space, ensuring the resulting state remains within the boundaries of the board.
+3. **Goal Test**: Check if the current state matches the goal state.
+
+#### Applications:
+The 8-puzzle problem is used in:
+- AI research to study search algorithms.
+- Problem-solving techniques such as Breadth-First Search (BFS) and A*.
+- Educational tools for understanding state space and heuristics.
+
+Let me know if you need additional examples or details!
+
+
+
     
