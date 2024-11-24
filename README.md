@@ -195,4 +195,115 @@ Based on your example, here are some Prolog queries you can execute in SWI-Prolo
 
 ### Example Queries and Outputs for Testing
 You can modify or add new queries to explore the family tree further. Let me know if you need help with specific relations or explanations!
+
+
+
+# Experiment No. 2: Numeric Functions in Prolog
+
+## AIM
+Write a program to implement input, output, and predicates in Prolog.
+
+---
+
+## 2.1 Numeric Function in Prolog
+
+### Objective
+Find the division and modulus of two numbers.
+
+### Code
+```prolog
+division :-
+    write('Read no. 1: '),
+    read(X),
+    write('Read no. 2: '),
+    read(Y),
+    cal(X, Y).
+
+cal(X, Y) :-
+    Q is div(X, Y),
+    R is mod(X, Y),
+    write('Quotient is: '),
+    write(Q),
+    write('\nRemainder is: '),
+    write(R).
+```
+
+### Example Query and Output
+#### Query:
+```prolog
+?- division.
+```
+#### Output:
+```
+Read no. 1: 10
+Read no. 2: 3
+Quotient is: 3
+Remainder is: 1
+```
+
+---
+
+## 2.2 Evaluate Different Numeric Functions in Prolog
+
+### Objective
+Evaluate the square root, maximum value, and floor value of numbers.
+
+### Code
+```prolog
+cal :-
+    write('Enter no. 1: '),
+    read(X),
+    write('Enter no. 2: '),
+    read(Y),
+    comp(X, Y).
+
+comp(X, Y) :-
+    S is sqrt(X),
+    write('Square root is: '),
+    write(S),
+    M is max(X, Y),
+    write('\nMaximum is: '),
+    write(M),
+    F is floor(X),
+    write('\nFloor value is: '),
+    write(F).
+```
+
+### Example Query and Output
+#### Query:
+```prolog
+?- cal.
+```
+#### Output:
+```
+Enter no. 1: 3
+Enter no. 2: 5
+Square root is: 1.732
+Maximum is: 5
+Floor value is: 3
+```
+
+---
+
+## Notes
+- **`div/2`**: Computes the integer quotient of two numbers.
+- **`mod/2`**: Computes the remainder of the division of two numbers.
+- **`sqrt/1`**: Computes the square root of a number.
+- **`max/2`**: Finds the maximum of two numbers.
+- **`floor/1`**: Rounds a number down to the nearest integer.
+
+### Steps to Run
+1. Save the code snippets into a `.pl` file (e.g., `numeric_functions.pl`).
+2. Open SWI-Prolog and load the file using:
+   ```prolog
+   ?- [numeric_functions].
+   ```
+3. Run the queries as shown in the examples to test the functionality.
+
+---
+
+### Additional Information
+Prolog's built-in predicates like `div/2`, `mod/2`, `sqrt/1`, and `max/2` are useful for various mathematical operations. The use of `write/1` and `read/1` enables user interaction for input and output.
+
+
     
