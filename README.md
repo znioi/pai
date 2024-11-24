@@ -79,4 +79,120 @@ Prolog's development began in 1972 in Marseille, France, under the guidance of A
     player(cricket, 11).
     ?- player(cricket, X).
     X = 11.
+
+    Let me transcribe and guide you through creating the Prolog facts, rules, and queries for this experiment. Here's how we will structure the solution for the Ramayana tree:
+
+---
+
+### **Prolog Code**
+#### Facts and Rules for the Ramayana Tree
+
+Below is the transcribed Prolog code and additional rules based on your uploaded image:
+
+```prolog
+% Facts
+wife(kaushalya, dashrath).
+wife(kaikey, dashrath).
+wife(sumitra, dashrath).
+wife(sita, ram).
+wife(urmila, laxman).
+wife(mandavi, bharat).
+wife(shrutakirti, shatrughan).
+
+son(ram, kaushalya).
+son(laxman, sumitra).
+son(bharat, kaikey).
+son(shatrughan, sumitra).
+son(luv, ram).
+son(khush, ram).
+son(angad, laxman).
+son(chandraketu, laxman).
+son(taksha, bharat).
+son(pushkal, bharat).
+son(subahu, shatrughan).
+son(shatrughat, shatrughan).
+
+% Rules
+husband(X, Y) :- wife(Y, X).
+daughterinlaw(D, M) :- wife(D, H), son(H, M).
+motherinlaw(X, Y) :- daughterinlaw(Y, X).
+fatherinlaw(F, D) :- motherinlaw(M, D), wife(M, F).
+grandson(X, Y) :- son(A, Y), son(X, A).
+father(X, Y) :- son(Y, X).
+```
+
+---
+
+### **Queries with Expected Output**
+Based on your example, here are some Prolog queries you can execute in SWI-Prolog:
+
+#### Sample Queries:
+1. **Who is the son of Kaushalya?**
+   ```prolog
+   ?- son(X, kaushalya).
+   ```
+   **Output:**  
+   ```
+   X = ram.
+   ```
+
+2. **Who are the sons of Ram?**
+   ```prolog
+   ?- son(X, ram).
+   ```
+   **Output:**  
+   ```
+   X = luv ;
+   X = khush.
+   ```
+
+3. **Who is the husband of Sita?**
+   ```prolog
+   ?- husband(X, sita).
+   ```
+   **Output:**  
+   ```
+   X = ram.
+   ```
+
+4. **Who is the grandson of Kaushalya?**
+   ```prolog
+   ?- grandson(X, kaushalya).
+   ```
+   **Output:**  
+   ```
+   X = luv ;
+   X = khush.
+   ```
+
+5. **Who is the father of Luv and Khush?**
+   ```prolog
+   ?- father(X, luv).
+   ```
+   **Output:**  
+   ```
+   X = ram.
+   ```
+
+---
+
+### Steps to Run the Prolog Code
+1. **Open SWI-Prolog.**
+   - If not installed, download and install it from [SWI-Prolog's website](https://www.swi-prolog.org/).
+
+2. **Create a Prolog file:**
+   - Save the code above in a file named `ramayana_tree.pl`.
+
+3. **Load the file in SWI-Prolog:**
+   ```prolog
+   ?- [ramayana_tree].
+   ```
+
+4. **Run Queries:**
+   - Enter the queries one by one to test relationships.
+
+---
+
+### Example Queries and Outputs for Testing
+You can modify or add new queries to explore the family tree further. Let me know if you need help with specific relations or explanations!
     
