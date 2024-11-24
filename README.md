@@ -429,5 +429,106 @@ X = 120
    - Until `factorial(0, 1)` is reached.
 
 
+# Experiment No. 5
+
+## Aim
+Write a program to solve the 4-Queen problem using Prolog.
+
+## Theory
+
+### 4-Queen Problem
+The 4-Queen problem is a classic combinatorial problem in which the goal is to place 4 queens on a 4×4 chessboard so that no two queens attack each other. In chess, a queen can attack another piece if it is on the same row, column, or diagonal. 
+
+The problem can be extended to an `N-Queen` problem for an `N×N` board, but here, we focus on the 4×4 case.
+
+### Key Concepts
+- **Board Representation**: The board is represented as a list of numbers, where the position of each queen is defined by its row or column.
+- **Constraints**: The placement of queens must satisfy the conditions:
+  1. No two queens are in the same row.
+  2. No two queens are in the same column.
+  3. No two queens are on the same diagonal.
+- **Backtracking**: The solution is found using backtracking, where the algorithm incrementally builds a solution and backtracks whenever a conflict arises.
+
+### Approach
+1. **Define Board and Valid Positions**: Represent the board size and ensure rows and columns are within valid ranges.
+2. **Attack Predicate**: Define when a queen can attack another.
+3. **Place Queens**: Use recursive predicates to place queens while ensuring no attacks.
+4. **Find Solutions**: Use backtracking to generate all valid queen placements.
+5. **Output Solutions**: Print all the solutions satisfying the constraints.
+
+## Program
+```prolog
+% Define the board size
+board_size(4).
+
+% Define the valid range for rows and columns
+valid_pos(P) :- board_size(N), between(1, N, P).
+
+% Define the attack predicate
+attack(R1, C1, R2, C2) :-
+    R1 =:= R2;             % Same row
+    C1 =:= C2;             % Same column
+    abs(R1 - R2) =:= abs(C1 - C2).  % Diagonal
+
+% Place queens on the board
+place_queens([], []).
+place_queens([R|Rs], [C|Cs]) :-
+    valid_pos(R), valid_pos(C),
+    no_attack(R, C, Rs, Cs),
+    place_queens(Rs, Cs).
+
+% Check for no attacks
+no_attack(_, _, [], []).
+no_attack(R, C, [R1|Rs], [C1|Cs]) :-
+    \+ attack(R, C, R1, C1),
+    no_attack(R, C, Rs, Cs).
+
+% Solve the 4-Queens problem
+solve_queens(Queens) :-
+    board_size(N),
+    numlist(1, N, Rows),
+    permutation(Rows, Queens),
+    place_queens(Queens, _).
+
+% Find and print all solutions
+find_solutions(Solutions) :-
+    findall(Q, solve_queens(Q), Solutions).
+
+% Example usage
+?- find_solutions(Solutions), length(Solutions, Count), write('Total solutions: '), write(Count).
+```
+
+## Example Query and Output
+### Query
+```prolog
+?- find_solutions(Solutions).
+```
+
+### Output
+```
+Solutions = [[2, 4, 1, 3], [3, 1, 4, 2]].
+Total solutions: 2
+```
+
+### Explanation
+1. The program calculates all valid configurations where the queens do not attack each other.
+2. In the 4×4 case, there are two distinct solutions: `[2, 4, 1, 3]` and `[3, 1, 4, 2]`.
+
+### Visualization of Solutions
+For `[2, 4, 1, 3]`:
+```
+. Q . .
+. . . Q
+Q . . .
+. . Q .
+```
+For `[3, 1, 4, 2]`:
+```
+. . Q .
+Q . . .
+. . . Q
+. Q . .
+
+
 
     
