@@ -1085,7 +1085,196 @@ This experiment demonstrates the use of the Depth First Search (DFS) algorithm i
 
 --- 
 
+# EXPERIMENT NO. 10
 
+## Aim:
+To write a Python program to solve the Tower of Hanoi problem.
+
+---
+
+## Theory:
+
+### Tower of Hanoi:
+The Tower of Hanoi is a mathematical puzzle consisting of three rods and a number of disks of different sizes. The puzzle begins with the disks stacked in ascending order of size on one rod, with the smallest disk on top. The goal is to move the entire stack to another rod, following these rules:
+
+### Rules:
+1. Only one disk can be moved at a time.
+2. A disk can only be moved if it is the uppermost disk on a rod.
+3. No disk may be placed on top of a smaller disk.
+
+This problem is a classic example of recursion, where the solution involves breaking the problem into smaller sub-problems of the same type.
+
+### Algorithm:
+1. Move the top `n-1` disks from the source rod to an auxiliary rod using the destination rod.
+2. Move the largest disk directly from the source rod to the destination rod.
+3. Move the `n-1` disks from the auxiliary rod to the destination rod using the source rod.
+
+The process repeats recursively until all disks are transferred to the destination rod.
+
+---
+
+## Python Source Code:
+```python
+# Function to solve Tower of Hanoi
+def tower_of_hanoi(n, source, destination, auxiliary):
+    if n == 1:
+        print(f"Move disk 1 from {source} to {destination}")
+        return
+    
+    # Step 1: Move n-1 disks from source to auxiliary using destination
+    tower_of_hanoi(n - 1, source, auxiliary, destination)
+    
+    # Step 2: Move the nth disk from source to destination
+    print(f"Move disk {n} from {source} to {destination}")
+    
+    # Step 3: Move the n-1 disks from auxiliary to destination using source
+    tower_of_hanoi(n - 1, auxiliary, destination, source)
+
+# Example usage:
+if __name__ == "__main__":
+    num_disks = 3
+    print(f"Solving Tower of Hanoi for {num_disks} disks:")
+    tower_of_hanoi(num_disks, 'A', 'C', 'B')
+```
+
+---
+
+## Example Usage:
+### Input:
+The program is designed to solve the Tower of Hanoi for a specified number of disks. For example, solving for 3 disks:
+
+### Output:
+```
+Solving Tower of Hanoi for 3 disks:
+Move disk 1 from A to C
+Move disk 2 from A to B
+Move disk 1 from C to B
+Move disk 3 from A to C
+Move disk 1 from B to A
+Move disk 2 from B to C
+Move disk 1 from A to C
+```
+
+---
+
+## Key Observations:
+1. For `n` disks, the minimum number of moves required is `2^n - 1`.
+2. The problem demonstrates the power of recursion and is a useful example for understanding divide-and-conquer algorithms.
+
+---
+
+Feel free to modify the `num_disks` variable in the program to test the solution for different numbers of disks.
+
+
+# EXPERIMENT NO. 11
+
+## Aim:
+To write a Python program to solve the Water Jug Problem using the BFS algorithm.
+
+---
+
+## Theory:
+
+### Water Jug Problem:
+The Water Jug Problem is a classic example of a constraint satisfaction problem. Given two jugs with fixed capacities and an unlimited water supply, the goal is to measure out a specific amount of water. The problem must adhere to the following constraints:
+
+### Rules:
+1. You can fill any of the jugs completely.
+2. You can empty any of the jugs completely.
+3. You can transfer water from one jug to another until one jug is empty or the other is full.
+
+The problem can be represented as a state space where each state is defined by the amount of water in each jug.
+
+### Mathematical Insight:
+To solve the problem, the target volume must be a multiple of the greatest common divisor (GCD) of the two jug capacities.
+
+---
+
+## Python Source Code:
+### Function to Calculate GCD:
+```python
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+```
+
+### BFS Solution for Water Jug Problem:
+```python
+from collections import deque
+
+def water_jug_bfs(jug1_capacity, jug2_capacity, target):
+    # Check if solution is possible
+    if target % gcd(jug1_capacity, jug2_capacity) != 0:
+        return "No solution possible"
+
+    # Initialize visited set and queue
+    visited = set()
+    queue = deque([(0, 0)])  # Start with both jugs empty
+
+    while queue:
+        current_state = queue.popleft()
+        jug1, jug2 = current_state
+
+        # Check if we've reached the target
+        if jug1 == target or jug2 == target:
+            return f"Solution found: {current_state}"
+
+        if current_state in visited:
+            continue
+
+        visited.add(current_state)
+
+        # Possible actions:
+        # 1. Fill Jug 1
+        queue.append((jug1_capacity, jug2))
+        # 2. Fill Jug 2
+        queue.append((jug1, jug2_capacity))
+        # 3. Empty Jug 1
+        queue.append((0, jug2))
+        # 4. Empty Jug 2
+        queue.append((jug1, 0))
+        # 5. Pour Jug 1 into Jug 2
+        transfer = min(jug1, jug2_capacity - jug2)
+        queue.append((jug1 - transfer, jug2 + transfer))
+        # 6. Pour Jug 2 into Jug 1
+        transfer = min(jug2, jug1_capacity - jug1)
+        queue.append((jug1 + transfer, jug2 - transfer))
+
+    return "No solution found"
+
+# Example usage:
+if __name__ == "__main__":
+    jug1_capacity = 4
+    jug2_capacity = 3
+    target = 2
+
+    print(f"Solving Water Jug Problem for capacities ({jug1_capacity}, {jug2_capacity}) and target {target}:")
+    print(water_jug_bfs(jug1_capacity, jug2_capacity, target))
+```
+
+---
+
+## Example Usage:
+### Input:
+Jug capacities: `4 liters`, `3 liters`
+Target: `2 liters`
+
+### Output:
+```
+Solving Water Jug Problem for capacities (4, 3) and target 2:
+Solution found: (2, 0)
+```
+
+---
+
+## Key Observations:
+1. The problem is solvable if and only if the target is a multiple of the GCD of the jug capacities.
+2. BFS ensures that all possible states are explored in the shortest path manner, making it an efficient approach to solve the problem.
+
+---
+
+Feel free to modify the capacities or target in the program to test different configurations.
 
 
 
