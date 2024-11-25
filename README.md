@@ -203,6 +203,180 @@ You can modify or add new queries to explore the family tree further. Let me kno
 ## AIM
 Write a program to implement input, output, and predicates in Prolog.
 
+# Prolog Basics
+
+## Inputs Text Handling in Prolog
+In Prolog, handling text input typically involves reading from the user or a file. The built-in predicates provide flexible ways to manage inputs.
+
+### Key Predicates:
+1. **`read/1`**:
+   - Reads a Prolog term from the standard input.
+   - Example:
+     ```prolog
+     ?- read(X).
+     % User inputs: hello.
+     X = hello.
+     ```
+
+2. **`read_line_to_string/2`** (SWI-Prolog):
+   - Reads a line from the input and returns it as a string.
+   - Example:
+     ```prolog
+     ?- read_line_to_string(user_input, Line).
+     % User inputs: Hello World!
+     Line = "Hello World!".
+     ```
+
+3. **`get_char/1`**:
+   - Reads a single character from the input.
+   - Example:
+     ```prolog
+     ?- get_char(Char).
+     % User inputs: a
+     Char = 'a'.
+     ```
+
+4. **`get_code/1`**:
+   - Reads a single character as its ASCII code.
+   - Example:
+     ```prolog
+     ?- get_code(Code).
+     % User inputs: a
+     Code = 97.
+     ```
+
+5. **`atom_chars/2`** and **`string_chars/2`**:
+   - Converts an atom or string to a list of characters and vice versa.
+   - Example:
+     ```prolog
+     ?- atom_chars('hello', Chars).
+     Chars = ['h', 'e', 'l', 'l', 'o'].
+     ```
+
+### Reading Input from a File:
+Use predicates like `open/3`, `read/2`, and `close/1` to handle file input.
+Example:
+```prolog
+?- open('file.txt', read, Stream),
+   read(Stream, Content),
+   close(Stream).
+Content = your_file_content.
+```
+
+---
+
+## Numeric Functions in Prolog
+Prolog supports numerical computations using built-in arithmetic predicates and functions.
+
+### Common Arithmetic Predicates:
+1. **`is/2`**:
+   - Used to evaluate arithmetic expressions.
+   - Example:
+     ```prolog
+     ?- X is 5 + 3.
+     X = 8.
+     ```
+
+2. **Relational Operators**:
+   - Compare numerical values.
+     - `=`: Equality.
+     - `\=`: Inequality.
+     - `>`: Greater than.
+     - `<`: Less than.
+     - `>=`: Greater than or equal to.
+     - `=<`: Less than or equal to.
+   - Example:
+     ```prolog
+     ?- 5 > 3.
+     true.
+     ```
+
+### Built-in Numeric Functions:
+1. **Basic Operations**:
+   - Addition: `+`
+   - Subtraction: `-`
+   - Multiplication: `*`
+   - Division: `/`
+
+2. **Advanced Functions**:
+   - Integer Division: `div`
+     ```prolog
+     ?- X is 7 div 2.
+     X = 3.
+     ```
+   - Modulus: `mod`
+     ```prolog
+     ?- X is 7 mod 2.
+     X = 1.
+     ```
+   - Power: `^`
+     ```prolog
+     ?- X is 2^3.
+     X = 8.
+     ```
+   - Square Root: `sqrt/1`
+     ```prolog
+     ?- X is sqrt(16).
+     X = 4.0.
+     ```
+   - Absolute Value: `abs/1`
+     ```prolog
+     ?- X is abs(-5).
+     X = 5.
+     ```
+
+### Notes:
+- Arithmetic is not evaluated during unification. Always use `is/2` to compute values.
+
+---
+
+## Predicates in Prolog
+A predicate in Prolog defines a relation or rule, consisting of facts, rules, or queries.
+
+### Facts:
+- Declare information that is always true.
+- Example:
+  ```prolog
+  parent(john, mary).
+  parent(mary, alice).
+  ```
+
+### Rules:
+- Define relations based on other facts or rules.
+- Example:
+  ```prolog
+  grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+  ```
+
+### Queries:
+- Used to retrieve information from the Prolog database.
+- Example:
+  ```prolog
+  ?- grandparent(john, Y).
+  Y = alice.
+  ```
+
+### Structure of a Predicate:
+A predicate consists of:
+1. **Name**: The identifier of the predicate.
+2. **Arity**: Number of arguments it takes.
+   - Example: `parent/2` means the predicate `parent` takes 2 arguments.
+
+### Types of Predicates:
+1. **Dynamic Predicates**:
+   - Defined or modified during runtime using `assert/1` and `retract/1`.
+     ```prolog
+     ?- assert(parent(paul, linda)).
+     ?- parent(paul, linda).
+     true.
+     ```
+
+2. **Recursive Predicates**:
+   - Define relations recursively.
+     ```prolog
+     ancestor(X, Y) :- parent(X, Y).
+     ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+     
 ---
 
 ## 2.1 Numeric Function in Prolog
