@@ -923,6 +923,9 @@ state(0, A, B, C, D, E, F, G, H) :- state(A, B, C, 0, D, E, F, G, H).
 
 state(A, B, C, 0, D, E, F, G, H) :- state(A, B, C, D, 0, E, F, G, H).
 ```
+```
+?- state(2, 8, 3, 1, 6, 4, 7, 0, 5).
+```
 
 ### Output:
 Given the start and goal states, the program determines a series of valid transitions to solve the puzzle.
